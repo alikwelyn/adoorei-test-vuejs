@@ -1,6 +1,6 @@
 <template>
-  <div class="bg-slate-500">
-    <nav class="relative px-4 py-4 flex justify-between items-center bg-white">
+  <div class="navbar bg-slate-500">
+    <nav class="relative px-4 py-4 flex justify-between items-center">
       <router-link
         class="flex items-center"
         to="/"><img src="https://www.adoorei.com.br/wp-content/uploads/2022/03/LOGO-ADOREI.svg" class="h-6 mr-3 sm:h-9" alt="Adoorei Logo" />
