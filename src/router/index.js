@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import ProductView from '../views/ProductView.vue'
+import CategoryView from '../views/CategoryView.vue'
 
 Vue.use(VueRouter)
 
@@ -26,6 +27,15 @@ const routes = [
     props: true,
     meta: {
       title: 'Product'
+    }
+  },
+  {
+    path: '/category/:id',
+    name: 'category',
+    component: CategoryView,
+    props: true,
+    meta: {
+      title: 'Category'
     }
   }
 ]
