@@ -40,10 +40,10 @@
           </router-link>
         </div>
         <div>
-          <form>
+          <form @submit.prevent>
             <label class="hidden" for="search-form">Search</label>
-            <input class="bg-grey-lightest border-2 focus:border-orange p-2 rounded-lg shadow-inner w-full" placeholder="Search" type="text">
-            <button class="hidden">Submit</button>
+            <input v-model="searchTerm" @input="searchProducts" class="bg-grey-lightest border-2 focus:border-orange p-2 rounded-lg shadow-inner w-full" placeholder="Search" type="text">
+            <button @click="searchProducts" class="hidden">Submit</button>
           </form>
         </div>
       </div>
@@ -97,6 +97,11 @@ import { mapState } from 'vuex';
 
 export default {
   name: "NavBar",
+  data() {
+    return {
+      searchTerm: ''
+    }
+  },
   mounted() {
     this.initializeBurgerMenus();
     this.initializeCloseMenus();
@@ -142,7 +147,10 @@ export default {
           });
         });
       });
+    },
+    searchProducts() {
+      this.$emit('search', this.searchTerm.trim());
     }
-  }
+  },
 };
 </script>

@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <NavBar/>
-    <router-view/>
+    <NavBar @search="searchProducts"/>
+    <router-view :searchTerm="searchTerm"/>
     <FooterNavigation/>
   </div>
 </template>
@@ -10,9 +10,24 @@
 import NavBar from './components/NavBar.vue'
 import FooterNavigation from './components/Footer.vue'
 export default {
+  data() {
+    return {
+      searchTerm: ''
+    }
+  },
   components: {
     NavBar,
     FooterNavigation
+  },
+  methods: {
+    searchProducts(searchTerm) {
+      this.searchTerm = searchTerm;
+    },
+  },
+  watch: {
+    $route() {
+      this.searchTerm = '';
+    }
   }
 }
 </script>

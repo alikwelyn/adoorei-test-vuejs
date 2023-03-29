@@ -24,7 +24,7 @@
       <div class="w-fit mx-auto grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 mt-10 mb-5">
         <div 
           class="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl"
-          v-for="product in category" :key="product.id"
+          v-for="product in filteredProducts" :key="product.id"
         >
           <router-link :to="`/product/${product.id}`">
             <CardProduct :img="product.image" :category="product.category" :name="product.title" :price="product.price.toString()"/>
@@ -41,6 +41,9 @@ import { mapState, mapActions } from 'vuex'
 
 export default {
   name: 'CategoryView',
+  props: {
+    searchTerm: String
+  },
   components: {
     CardProduct
   },
@@ -63,6 +66,15 @@ export default {
       } else {
         return 0;
       }
+    },
+    filteredProducts() {
+      if (this.searchTerm.trim() === '') {
+        return this.category;
+      }
+      const term = this.searchTerm.trim().toLowerCase();
+      return this.category.filter(category =>
+        category.title.toLowerCase().includes(term)
+      );
     }
   },
   methods: {
