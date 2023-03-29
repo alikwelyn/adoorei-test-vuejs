@@ -15,14 +15,14 @@
       <ul class="hidden absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 lg:flex lg:mx-auto lg:flex lg:items-center lg:w-auto lg:space-x-6">
         <li class="mb-1">
           <router-link
-          class="text-sm text-gray-400 hover:text-gray-500"
-          to="/">Home
+            class="text-sm text-gray-400 hover:text-gray-500"
+            to="/">Home
           </router-link>
         </li>
-        <li class="mb-1">
+        <li class="mb-1" v-for="(category, index) in categories" :key="index">
           <router-link
-          class="text-sm text-gray-400 hover:text-gray-500"
-          to="/about">About
+            class="text-sm text-gray-400 hover:text-gray-500"
+            :to="`${$route.fullPath.includes('/category') ? '' : '/category/'}${category}`">{{ category.charAt(0).toUpperCase() + category.slice(1) }}
           </router-link>
         </li>
       </ul>
@@ -93,7 +93,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex'
 
 export default {
   name: "NavBar",
@@ -102,11 +102,8 @@ export default {
       searchTerm: ''
     }
   },
-  mounted() {
-    this.initializeBurgerMenus();
-    this.initializeCloseMenus();
-  },
   computed: {
+    ...mapState('categories', ['categories', 'loading', 'error']),
     ...mapState({
       items: state => state.cart.items
     }),
@@ -115,6 +112,10 @@ export default {
     }
   },
   methods: {
+    ...mapActions('categories', ['getAllCategories']),
+    async loadCategories() {
+      await this.getAllCategories();
+    },
     initializeBurgerMenus() {
       const burgerButtons = Array.from(document.querySelectorAll('.navbar-burger'));
       const menuItems = Array.from(document.querySelectorAll('.navbar-menu'));
@@ -151,6 +152,11 @@ export default {
     searchProducts() {
       this.$emit('search', this.searchTerm.trim());
     }
+  },
+  mounted() {
+    this.initializeBurgerMenus();
+    this.initializeCloseMenus();
+    this.loadCategories();
   },
 };
 </script>

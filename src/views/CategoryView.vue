@@ -127,6 +127,10 @@ export default {
   mounted() {
     this.loadCategory();
   },
+  beforeRouteUpdate(to, from, next) {
+    this.loadCategory();
+    next();
+  },
   beforeRouteEnter(to, from, next) {
     next(vm => {
       if (vm.category) {
