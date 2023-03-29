@@ -7,7 +7,7 @@
         </div>
       </div>
       <div class="md:flex-1 px-4">
-        <h4 class="font-bold text-orange mb-2 uppercase text-xs tracking-widest">
+        <h4 class="font-bold text-orange mt-5 mb-2 uppercase text-xs tracking-widest">
           <router-link :to="`/category/${product.category}`">
             {{ product.category }}
           </router-link>
@@ -66,7 +66,7 @@ export default {
   },
   data() {
     return {
-      quantity: 0
+      quantity: 1
     }
   },
   computed: {
