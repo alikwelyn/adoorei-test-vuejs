@@ -4,6 +4,7 @@ export const products = {
   namespaced: true,
   state: {
     products: {},
+    product: {},
     error: null,
     loading: false
   },
@@ -20,11 +21,27 @@ export const products = {
         commit('setLoading', false);
         return Promise.reject(error);
       }
-    }
+    },
+    async getProductById({ commit }, id) {
+      try {
+        commit('setLoading', true);
+        const product = await ProductsService.getById(id);
+        commit('setSingle', product.data);
+        commit('setLoading', false);
+        return Promise.resolve(product.data);
+      } catch (error) {
+        commit('setFailure', error);
+        commit('setLoading', false);
+        return Promise.reject(error);
+      }
+    },
   },
   mutations: {
     setProducts(state, products) {
       state.products = products;
+    },
+    setSingle(state, product) {
+      state.product = product
     },
     setLoading(state, loading) {
       state.loading = loading;
