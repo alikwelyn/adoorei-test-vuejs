@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import ProductView from '../views/ProductView.vue'
 import CategoryView from '../views/CategoryView.vue'
+import CartView from '../views/CartView.vue'
 
 Vue.use(VueRouter)
 
@@ -36,6 +37,15 @@ const routes = [
     props: true,
     meta: {
       title: 'Category'
+    }
+  },
+  {
+    path: '/cart',
+    name: 'cart',
+    component: CartView,
+    props: true,
+    meta: {
+      title: 'Cart'
     }
   }
 ]
