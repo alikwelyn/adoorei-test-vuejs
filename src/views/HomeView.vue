@@ -12,9 +12,7 @@
               class="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl"
               v-for="product in products" :key="product.id"
             >
-              <router-link :to="`/product/${product.id}`">
-                <CardProduct :img="product.image" :category="product.category" :name="product.title" :price="product.price.toString()"/>
-              </router-link>
+              <CardProduct :id="product.id" :img="product.image" :category="product.category" :name="product.title" :price="product.price.toString()"/>
             </div>
           </div>
         </div>
