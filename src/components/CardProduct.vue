@@ -2,7 +2,11 @@
     <div>
         <img :src="img" alt="Product" class="h-80 w-72 object-contain rounded-t-xl px-5" />
             <div class="px-4 py-3 w-72">
-                <span class="text-gray-400 mr-3 uppercase text-xs">{{ category }}</span>
+                <span class="text-gray-400 mr-3 uppercase text-xs">
+                    <router-link :to="`/category/${category}`">
+                        {{ category }}
+                    </router-link>
+                </span>
                 <p class="text-lg font-bold text-black truncate block capitalize">{{ name }}</p>
                 <div class="flex items-center">
                 <p class="text-lg font-semibold text-black cursor-auto my-3">${{ price }}</p>

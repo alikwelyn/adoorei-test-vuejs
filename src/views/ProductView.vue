@@ -7,7 +7,11 @@
         </div>
       </div>
       <div class="md:flex-1 px-4">
-        <h4 class="font-bold text-orange mb-2 uppercase text-xs tracking-widest">{{ product.category }}</h4>
+        <h4 class="font-bold text-orange mb-2 uppercase text-xs tracking-widest">
+          <router-link :to="`/category/${product.category}`">
+            {{ product.category }}
+          </router-link>
+        </h4>
         <h1 class="text-very-dark mb-4 font-bold text-3xl lg:text-4xl">{{ product.title }}</h1>
         <p class="text-dark-grayish mb-6 text-base sm:text-lg">{{ product.description }}</p>
         <div class="flex items-center justify-between mb-6 sm:flex-col sm:items-start">
